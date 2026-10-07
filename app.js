@@ -68,6 +68,7 @@ app.get("/disaster-reports/:id", (req, res) => {
 });
 
 // POST -> untuk menambahkan data
+// Data Baru untuk ditambahkan -> {"jenisBencana: "gempa", lokasi: "Kec. Plaju", tanggal: "2026-10-06", tingkatKeparahan: "sedang", jumlahPengungsi: 50}
 app.post("/disaster-reports", (req, res) => {
   const {
     jenisBencana, lokasi,
@@ -84,18 +85,8 @@ app.post("/disaster-reports", (req, res) => {
     });
   }
 
-  const jenisBencanaValid = [
-    "banjir",
-    "longsor",
-    "kebakaran",
-    "gempa"
-  ];
-
-  const tingkatKeparahanValid = [
-    "ringan",
-    "sedang",
-    "berat"
-  ];
+  const jenisBencanaValid = ["banjir","longsor","kebakaran","gempa"];
+  const tingkatKeparahanValid = ["ringan","sedang","berat"];
 
   if (!jenisBencanaValid.includes(jenisBencana)) {
     return res.status(400).json({
@@ -134,6 +125,8 @@ app.post("/disaster-reports", (req, res) => {
 });
 
 // PUT merupakan bagian untuk mengubah data
+// Data yang diubah adalah bagian tingkatkeparahan yang awalnya "sedang" menjadi "berat"
+// Dan bagian jumlahpengungsi yang awalnya "50" menjadi "75"
 app.put("/disaster-reports/:id", (req, res) => {
   const id = Number(req.params.id);
 
@@ -161,13 +154,8 @@ app.put("/disaster-reports/:id", (req, res) => {
     });
   }
 
-  const jenisBencanaValid = [
-    "banjir", "longsor", "kebakaran", "gempa"
-  ];
-
-  const tingkatKeparahanValid = [
-    "ringan", "sedang", "berat"
-  ];
+  const jenisBencanaValid = ["banjir", "longsor", "kebakaran", "gempa"];
+  const tingkatKeparahanValid = ["ringan", "sedang", "berat"];
 
   if (!jenisBencanaValid.includes(jenisBencana)) {
     return res.status(400).json({
@@ -229,7 +217,7 @@ app.delete("/disaster-reports/:id", (req, res) => {
   });
 });
 
-// Data yang tidak ada (Tidak Terdaftar)
+// Data yang tidak ada (Tidak Terdaftar/Tidak ditemukan)
 app.use((req, res) => {
   res.status(404).json({
     status: 404,
