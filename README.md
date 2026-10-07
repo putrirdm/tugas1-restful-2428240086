@@ -35,7 +35,7 @@
 | `lokasi` | string | * |
 | `tanggal` | string | * |
 | `tingkatKeparahan` | string | * |
-| `jumlahPengungsi` | number | - |
+| `jumlahPengungsi` | number | * |
 
 ## Keterangan:
 - jenisBencana : banjir, longsor, kebakaran, atau gempa
