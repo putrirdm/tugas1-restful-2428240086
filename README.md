@@ -4,7 +4,7 @@
 - KELAS : SI5B
 - TOPIK : 21 (Kebencanaan)
 - Link Repository Github :  https://github.com/putrirdm/tugas1-restful-2428240086 
-- Link Deploy Vercel : 
+- Link Deploy Vercel : https://tugas1-restful-2428240086.vercel.app/ 
 
 ## Cara Menjalankan Secara Lokal
 1. Buka GitHub Desktop, pilih repository, lalu klik Open in Visual Studio Code.
