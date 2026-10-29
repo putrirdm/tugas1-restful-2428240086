@@ -1,82 +1,42 @@
-let disasterReports = [
-  {
-    id: 1,
-    jenisBencana: "banjir",
-    lokasi: "Kec. Seberang Ulu I",
-    tanggal: "2026-09-20",
-    tingkatKeparahan: "sedang",
-    jumlahPengungsi: 120
+
+const mongoose = require('mongoose');
+const laporanBencanaSchema = new mongoose.Schema({
+  jenisBencana: {
+    type: String,
+    required: [true, 'jenisBencana wajib diisi'],
+    enum: ['banjir', 'longsor', 'kebakaran', 'gempa'],
+    trim: true
   },
-  {
-    id: 2,
-    jenisBencana: "kebakaran",
-    lokasi: "Kec. Ilir Timur I",
-    tanggal: "2026-09-21",
-    tingkatKeparahan: "berat",
-    jumlahPengungsi: 80
+
+  lokasi: {
+    type: String,
+    required: [true, 'lokasi wajib diisi'],
+    trim: true
   },
-  {
-    id: 3,
-    jenisBencana: "longsor",
-    lokasi: "Kec. Sukarami",
-    tanggal: "2026-09-22",
-    tingkatKeparahan: "ringan",
-    jumlahPengungsi: 30
+
+  tanggal: {
+    type: Date,
+    required: [true, 'tanggal wajib diisi']
+  },
+
+  tingkatKeparahan: {
+    type: String,
+    required: [true, 'tingkatKeparahan wajib diisi'],
+    enum: ['ringan', 'sedang', 'berat'],
+    trim: true
+  },
+
+  jumlahPengungsi: {
+  type: Number,
+  required: [true, 'jumlahPengungsi wajib diisi'],
+  min: 0
+},
+
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
-];
+});
 
-let nextId = 4;
-
-function getAll(filterJenisBencana) {
-  if (filterJenisBencana) {
-    return disasterReports.filter(
-      (report) => report.jenisBencana === filterJenisBencana
-    );
-  }
-  return disasterReports;
-}
-
-function getById(id) {
-  return disasterReports.find((item) => item.id === id);
-}
-
-function create(data) {
-  const dataBaru = {
-    id: nextId++,
-    jenisBencana: data.jenisBencana,
-    lokasi: data.lokasi,
-    tanggal: data.tanggal,
-    tingkatKeparahan: data.tingkatKeparahan,
-    jumlahPengungsi: data.jumlahPengungsi ?? 0
-  };
-
-  disasterReports.push(dataBaru);
-  return dataBaru;
-}
-
-function update(id, data) {
-  const index = disasterReports.findIndex((item) => item.id === id);
-  if (index === -1) return null;
-
-  const updatedReport = {
-    id,
-    jenisBencana: data.jenisBencana,
-    lokasi: data.lokasi,
-    tanggal: data.tanggal,
-    tingkatKeparahan: data.tingkatKeparahan,
-    jumlahPengungsi: data.jumlahPengungsi ?? 0
-  };
-
-  disasterReports[index] = updatedReport;
-  return updatedReport;
-}
-
-function remove(id) {
-  const index = disasterReports.findIndex((item) => item.id === id);
-  if (index === -1) return false;
-
-  disasterReports.splice(index, 1);
-  return true;
-}
-
-module.exports = { getAll, getById, create, update, remove };
+module.exports = mongoose.model('disasterReports',laporanBencanaSchema
+);

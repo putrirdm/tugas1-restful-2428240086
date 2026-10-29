@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-
+const mongoose = require('mongoose'); 
 const logger = require("./middlewares/logger");
 const errorHandler = require("./middlewares/errorHandler");
 const disasterReportsRoutes = require("./routes/disasterReportsRoutes");
@@ -43,10 +43,20 @@ app.use((req, res) => {
 
 app.use(errorHandler);
 
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`Server berjalan di http://localhost:${PORT}`);
-  });
-}
+// if (require.main === module) {
+//   app.listen(PORT, () => {
+//     console.log(`Server berjalan di http://localhost:${PORT}`);
+//   });
+// }
 
-module.exports = app;
+ module.exports = app;
+
+mongoose.connect(process.env.DB_URI)
+  .then(() => {
+    console.log('Terhubung ke MongoDB');
+    app.listen(PORT, () => console.log(`Server berjalan di http://localhost:${PORT}`));
+  })
+  .catch((err) => {
+    console.error('Gagal terhubung:', err.message);
+    process.exit(1);
+  });

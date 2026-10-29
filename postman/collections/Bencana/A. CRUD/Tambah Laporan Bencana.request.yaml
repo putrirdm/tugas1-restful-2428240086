@@ -13,7 +13,9 @@ body:
 
     \  \"tanggal\": \"2026-10-20\",\r
 
-    \  \"tingkatKeparahan\": \"sedang\"\r
+    \  \"tingkatKeparahan\": \"sedang\",\r
+
+    \  \"jumlahPengungsi\": 150\r
 
     }"
 scripts:
