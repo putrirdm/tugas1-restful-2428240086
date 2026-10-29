@@ -1,0 +1,40 @@
+$kind: http-request
+name: POST Data Tidak Lengkap (400)
+url: "{{base_url}}disaster-reports"
+method: POST
+headers:
+  x-api-key: "{{api_key}}"
+body:
+  type: json
+  content: "{\r
+
+    \  \"jenisBencana\": \"banjir\",\r
+
+    \  \"Lokasi\":\"Lemabang\"\r
+
+    }\r
+
+    \ "
+scripts:
+  - type: afterResponse
+    code: "pm.test('Status code adalah 400', function () {\r
+
+      \  pm.response.to.have.status(400);\r
+
+      });\r
+
+      \r
+
+      pm.test('Pesan error menyebut field wajib', function () {\r
+
+      \  pm.expect(pm.response.json().message).to.include('wajib diisi');\r
+
+      });\r
+
+      \r
+
+      \r
+
+      \r\n"
+    language: text/javascript
+order: 1522

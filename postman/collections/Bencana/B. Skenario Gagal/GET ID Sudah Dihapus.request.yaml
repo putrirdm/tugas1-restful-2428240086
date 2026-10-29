@@ -1,0 +1,24 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports/{{bencanaId}}"
+method: GET
+headers:
+  x-api-key: "{{api_key}}"
+scripts:
+  - type: afterResponse
+    code: "pm.test('Status code adalah 404', function () {\r
+
+      \  pm.response.to.have.status(404);\r
+
+      });\r
+
+      \r
+
+      pm.test('Pesan error: Data tidak ditemukan', function () {\r
+
+      \  pm.expect(pm.response.json().message).to.eql('Data tidak ditemukan');\r
+
+      });\r
+
+      \r\n"
+    language: text/javascript
+order: 4000
