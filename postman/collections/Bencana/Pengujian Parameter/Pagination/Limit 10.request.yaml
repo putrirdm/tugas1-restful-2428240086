@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports?page=3&limit=10"
+method: GET
+queryParams:
+  page: "3"
+  limit: "10"
+order: 3000

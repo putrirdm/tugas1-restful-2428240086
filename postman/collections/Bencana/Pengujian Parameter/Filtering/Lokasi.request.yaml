@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports?lokasi=Kecamatan Plaju"
+method: GET
+queryParams:
+  lokasi: Kecamatan Plaju
+order: 1000

@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports?sort=-tanggal"
+method: GET
+queryParams:
+  sort: -tanggal
+order: 1000

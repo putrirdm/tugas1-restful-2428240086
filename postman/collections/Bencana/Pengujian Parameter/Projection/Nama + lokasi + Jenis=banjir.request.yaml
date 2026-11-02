@@ -1,0 +1,7 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports?jenisBencana=banjir&fields=nama,lokasi,jenisBencana"
+method: GET
+queryParams:
+  jenisBencana: banjir
+  fields: nama,lokasi,jenisBencana
+order: 3390

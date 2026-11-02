@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports?fields=nama,jenisBencana"
+method: GET
+queryParams:
+  fields: nama,jenisBencana
+order: 1000
