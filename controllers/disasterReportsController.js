@@ -11,12 +11,12 @@ exports.create = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  const data = await laporanBencana.find();
+  const data = await laporanBencana.find().populate('petugas');
   res.json(data);
 };
 
 exports.getById = async (req, res) => {
-  const data = await laporanBencana.findById(req.params.id);
+  const data = await laporanBencana.findById(req.params.id).populate('petugas');
   if (!data) throw errorHttp(404, 'Data tidak ditemukan');
   res.json(data);
 };

@@ -1,6 +1,18 @@
 
 const mongoose = require('mongoose');
+
+const alamatSchema = new mongoose.Schema({
+  jalan: String,
+  kota: String,
+}, { _id: false });
+
 const laporanBencanaSchema = new mongoose.Schema({
+  nama: { 
+    type: String, 
+    required: [true, 'nama wajib diisi'], 
+    trim: true 
+  },
+
   jenisBencana: {
     type: String,
     required: [true, 'jenisBencana wajib diisi'],
@@ -13,6 +25,12 @@ const laporanBencanaSchema = new mongoose.Schema({
     required: [true, 'lokasi wajib diisi'],
     trim: true
   },
+
+  alamat: alamatSchema,
+
+  petugas: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Petugas' },
 
   tanggal: {
     type: Date,
