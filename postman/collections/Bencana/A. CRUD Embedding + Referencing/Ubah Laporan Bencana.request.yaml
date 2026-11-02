@@ -1,0 +1,81 @@
+$kind: http-request
+url: "{{base_url}}disaster-reports/6ae87b04aa3f3c032f93df0e"
+method: PUT
+headers:
+  x-api-key: "{{api_key}}"
+body:
+  type: json
+  content: "{\r
+
+    \    \"nama\": \"Novi\",\r
+
+    \    \"jenisBencana\": \"banjir\",\r
+
+    \    \"lokasi\": \"Kecamatan Ilir Timur II\",\r
+
+    \    \"alamat\": {\r
+
+    \        \"jalan\": \"Jl. Ramakasih\",\r
+
+    \        \"kota\": \"Palembang\"\r
+
+    \    },\r
+
+    \    \"petugas\": \"6ae8740bdab3fef50fe639c1\",\r
+
+    \    \"tanggal\": \"2026-11-02\",\r
+
+    \    \"tingkatKeparahan\": \"berat\",\r
+
+    \    \"jumlahPengungsi\": 125\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code adalah 200 OK\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Respons berupa JSON\", function () {\r
+
+      \    pm.response.to.be.json;\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Data laporan berhasil diubah\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData).to.have.property(\"id\");\r
+
+      \    pm.expect(String(jsonData.id)).to.eql(\r
+
+      \        String(pm.environment.get(\"bencanaId\"))\r
+
+      \    );\r
+
+      });\r
+
+      \r
+
+      pm.test(\"Tingkat keparahan sudah berubah\", function () {\r
+
+      \    const jsonData = pm.response.json();\r
+
+      \r
+
+      \    pm.expect(jsonData.tingkatKeparahan).to.eql(\"berat\");\r
+
+      });\r
+
+      \ "
+    language: text/javascript
+order: 5814
