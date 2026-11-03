@@ -1,0 +1,7 @@
+$kind: http-request
+name: Jumlah pengungsi paling sedikit
+url: "{{base_url}}disaster-reports?sort=jumlahPengungsi"
+method: GET
+queryParams:
+  sort: jumlahPengungsi
+order: 4000
